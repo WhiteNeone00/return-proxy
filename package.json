@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "description": "Custom timeout error page served by a Cloudflare Worker.",
+  "description": "Cloudflare Worker error pages with generic upstream handling.",
   "scripts": {
     "dev": "wrangler dev",
     "deploy": "wrangler deploy"

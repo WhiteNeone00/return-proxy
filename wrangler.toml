@@ -1,13 +1,4 @@
 name = "return-proxy"
 main = "src/worker.js"
-compatibility_date = "2025-01-01"
-workers_dev = true
-account_id = "1f6a47bf7e2f4a9b77a90d9fa47294e1"
-
-[observability]
-enabled = true
-
-[[routes]]
-pattern = "*.insideproxy.me/*"
-zone_name = "insideproxy.me"
+compatibility_date = "2026-09-09"
 
