@@ -1,0 +1,14 @@
+{
+  "name": "return-proxy",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Custom timeout error page served by a Cloudflare Worker.",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy"
+  },
+  "devDependencies": {
+    "wrangler": "^3.105.1"
+  }
+}
