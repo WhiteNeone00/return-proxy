@@ -142,25 +142,7 @@ const page = ({ requestId, clientIp, timestamp, status }) => `<!doctype html>
 export default {
   async fetch(request) {
     const url = new URL(request.url);
-    const route = url.pathname.replace(/\/$/, '');
-    const routeToCode = {
-      '/404': 404,
-      '/not-found': 404,
-      '/missing': 404,
-      '/502': 502,
-      '/bad-gateway': 502,
-      '/site-down': 502,
-      '/origin-down': 502,
-      '/503': 503,
-      '/unavailable': 503,
-      '/service-unavailable': 503,
-      '/maintenance': 503,
-      '/504': 504,
-      '/timeout': 504,
-      '/request-timeout': 504
-    };
-
-    let requestedCode = routeToCode[route] ?? null;
+    let requestedCode = null;
 
     if (requestedCode === null && url.searchParams.has('code')) {
       const value = Number(url.searchParams.get('code'));
@@ -203,8 +185,7 @@ export default {
       }
     }
 
-    const routeCode = routeToCode[route] || null;
-    const status = statusForCode(requestedCode) || statusForCode(routeCode || 504);
+    const status = statusForCode(requestedCode) || statusForCode(504);
     const requestId = request.headers.get('cf-ray') || crypto.randomUUID().slice(0, 18);
     const clientIp = request.headers.get('cf-connecting-ip')
       || request.headers.get('x-real-ip')
@@ -223,7 +204,7 @@ export default {
       headers: {
         'content-type': 'text/html; charset=UTF-8',
         'cache-control': 'no-store, max-age=0',
-        'x-return-proxy': proxyTag[requestedCode] || proxyTag[routeCode] || 'error',
+        'x-return-proxy': proxyTag[requestedCode] || 'error',
         'x-request-path': url.pathname
       }
     });
